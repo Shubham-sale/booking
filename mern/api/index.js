@@ -13,7 +13,7 @@ dotenv.config();
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    await mongoose.connect(process.env.MONGO,{dbName:"booking"});
     console.log("Connected to mongoDB.");
   } catch (error) {
     throw error;
@@ -22,6 +22,9 @@ const connect = async () => {
 
 mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
+});
+mongoose.connection.on("connected", () => {
+  console.log("mongoDB connected!");
 });
 
 //middlewares
